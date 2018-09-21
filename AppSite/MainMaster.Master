@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="AppSite.MainMaster" %>
+
+<!DOCTYPE html>
+
+<html <%--xmlns="http://www.w3.org/1999/xhtml"--%>>
+    <head runat="server">
+        <title>AppSite</title>
+        <link rel="stylesheet" href="css/divisions.css" />
+        <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    </head>
+    <body>
+        <form id="form1" runat="server">
+            <div>
+                <asp:ScriptManager ID="SM1" runat="server"></asp:ScriptManager>
+                <header>             <!--Header.....-->  
+                    <div id="myTopnav" class="topnav" style="height:20%;">                 
+                        <div class="linkA">
+                            <a href="Home.aspx">HOME</a>
+                        </div>               
+                        <div class="linkA">
+                            <a href="DownloadsPage.aspx">DOWNLOAD</a>
+                        </div>     
+                        <div class="linkA">
+                            <a href="Upload.aspx">UPLOAD</a>
+                        </div>
+                        <div class="linkA">
+                            <asp:TextBox ID="SearchItem" runat="server" Text="Search..." Width="80%" OnTextChanged="Unnamed_TextChanged"></asp:TextBox>
+                        </div>
+                        <div class="linkA">
+                            <a href="AboutUs.aspx">About Us</a>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                </header>
+                
+                <div style="height:70%;width:100%">       <!--Main Content.....-->                
+                    <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder> <!--Main.....-->
+                    <!-- The first page it will open will be Home.aspx.......-->
+                </div>
+
+            </div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+﻿body {
+}
+
+header{
+    height:20%!important;
+}
+
+.linkA {
+    display:block;
+    width: 20%;
+    float: left;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+}
+.topnav{     
+    display:block;
+    background-color:aqua;
+}
+
+.linkA:hover{
+    background-color:ActiveCaption;
+}
