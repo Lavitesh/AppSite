@@ -1,0 +1,15 @@
+C:\inetpub\wwwroot\AppSite\AppSite\bin\AppSite.dll.config
+C:\inetpub\wwwroot\AppSite\AppSite\bin\AppSite.dll
+C:\inetpub\wwwroot\AppSite\AppSite\bin\AppSite.pdb
+C:\inetpub\wwwroot\AppSite\AppSite\obj\Debug\AppSite.dll
+C:\inetpub\wwwroot\AppSite\AppSite\obj\Debug\AppSite.pdb
+C:\inetpub\wwwroot\AppSite\AppSite\obj\Debug\AppSite.csprojAssemblyReference.cache
+C:\inetpub\wwwroot\AppSite\AppSite\obj\Debug\AppSite.csproj.CoreCompileInputs.cache
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.dll
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.SqlServer.dll
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.Toolkit.Core.dll
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.xml
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.SqlServer.xml
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.Toolkit.Core.pdb
+C:\inetpub\wwwroot\AppSite\AppSite\bin\EntityFramework.Toolkit.Core.xml
+C:\inetpub\wwwroot\AppSite\AppSite\obj\Debug\AppSite.csproj.CopyComplete
