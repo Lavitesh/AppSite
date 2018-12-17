@@ -1,0 +1,311 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AppSiteTestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AppSiteTestEntitiesStoreContainer">
+          <EntitySet Name="Apps" EntityType="AppSiteTestModel.Store.App" store:Type="Tables" Schema="dbo" Table="App" />
+          <EntitySet Name="AppIcons" EntityType="AppSiteTestModel.Store.AppIcon" store:Type="Tables" Schema="dbo" Table="AppIcon" />
+          <EntitySet Name="AppLocations" EntityType="AppSiteTestModel.Store.AppLocation" store:Type="Tables" Schema="dbo" Table="AppLocation" />
+          <EntitySet Name="CategoryMasters" EntityType="AppSiteTestModel.Store.CategoryMaster" store:Type="Tables" Schema="dbo" Table="CategoryMaster" />
+          <EntitySet Name="AppCategories" EntityType="AppSiteTestModel.Store.AppCategory" store:Type="Tables" Schema="dbo" Table="AppCategory" />
+          <AssociationSet Name="FK_AppIcon_App" Association="AppSiteTestModel.Store.FK_AppIcon_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppIcon" EntitySet="AppIcons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppLocation_App" Association="AppSiteTestModel.Store.FK_AppLocation_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppLocation" EntitySet="AppLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppCategory_App" Association="AppSiteTestModel.Store.FK_AppCategory_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppCategory" EntitySet="AppCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppCategory_CategoryMaster" Association="AppSiteTestModel.Store.FK_AppCategory_CategoryMaster">
+            <End Role="CategoryMaster" EntitySet="CategoryMasters" />
+            <End Role="AppCategory" EntitySet="AppCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="AppName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Extension" Type="varchar(max)" Nullable="false" />
+          <Property Name="Size" Type="decimal" Nullable="false" Precision="20" Scale="0" />
+        </EntityType>
+        <EntityType Name="AppIcon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IconName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoryMaster">
+          <Key>
+            <PropertyRef Name="CategoryIndex" />
+          </Key>
+          <Property Name="CategoryIndex" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AppCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Category" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Category" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AppIcon_App">
+          <End Role="App" Type="AppSiteTestModel.Store.App" Multiplicity="1" />
+          <End Role="AppIcon" Type="AppSiteTestModel.Store.AppIcon" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppIcon">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppLocation_App">
+          <End Role="App" Type="AppSiteTestModel.Store.App" Multiplicity="1" />
+          <End Role="AppLocation" Type="AppSiteTestModel.Store.AppLocation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppLocation">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppCategory_App">
+          <End Role="App" Type="AppSiteTestModel.Store.App" Multiplicity="1" />
+          <End Role="AppCategory" Type="AppSiteTestModel.Store.AppCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppCategory">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppCategory_CategoryMaster">
+          <End Role="CategoryMaster" Type="AppSiteTestModel.Store.CategoryMaster" Multiplicity="1" />
+          <End Role="AppCategory" Type="AppSiteTestModel.Store.AppCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryMaster">
+              <PropertyRef Name="CategoryIndex" />
+            </Principal>
+            <Dependent Role="AppCategory">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AppSiteTestModel" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AppSiteTestEntities" annotation:LazyLoadingEnabled="true" ed:Guid="f0c9e7e5-a7b2-46fa-b0b3-5be9b241e258">
+          <EntitySet Name="Apps" EntityType="AppSiteTestModel.App" />
+          <EntitySet Name="AppIcons" EntityType="AppSiteTestModel.AppIcon" />
+          <EntitySet Name="AppLocations" EntityType="AppSiteTestModel.AppLocation" />
+          <EntitySet Name="CategoryMasters" EntityType="AppSiteTestModel.CategoryMaster" />
+          <EntitySet Name="AppCategories" EntityType="AppSiteTestModel.AppCategory" />
+          <AssociationSet Name="FK_AppIcon_AppSet" Association="AppSiteTestModel.FK_AppIcon_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppIcon" EntitySet="AppIcons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppLocation_AppSet" Association="AppSiteTestModel.FK_AppLocation_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppLocation" EntitySet="AppLocations" />
+          </AssociationSet>
+          <AssociationSet Name="App_AppCategorySet" Association="AppSiteTestModel.App_AppCategory">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppCategories" EntitySet="AppCategories" />
+          </AssociationSet>
+          <AssociationSet Name="CategoryMaster_AppCategorySet" Association="AppSiteTestModel.CategoryMaster_AppCategory">
+            <End Role="CategoryMaster" EntitySet="CategoryMasters" />
+            <End Role="AppCategories" EntitySet="AppCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="App" ed:Guid="3a477ff6-0b5d-4b46-93b2-8532ba1a3556">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="216ac664-99f2-40e2-b08f-a090853d623e" />
+          <Property Name="AppName" Type="String" Nullable="false" ed:ValidateRequired="true" ed:Guid="072b46d8-d655-4525-add5-e30587b4a148" />
+          <Property Name="Description" Type="String" MaxLength="255" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="82777f19-b02f-4240-9644-85db3179eb5f" />
+          <Property Name="Extension" Type="String" Nullable="false" ed:ValidateRequired="true" ed:Guid="e846b095-b78e-4e69-ac80-2e16bb02419f" />
+          <Property Name="Size" Type="Decimal" Nullable="false" Precision="20" Scale="0" ed:ValidateRequired="true" ed:Guid="a6a0dbb1-4965-4ca5-81f8-10ffd5f2a808" />
+          <NavigationProperty Name="AppIcon" Relationship="AppSiteTestModel.FK_AppIcon_App" FromRole="App" ToRole="AppIcon" ed:Guid="5cb120e3-e933-4956-9316-508637f2f048" />
+          <NavigationProperty Name="AppLocation" Relationship="AppSiteTestModel.FK_AppLocation_App" FromRole="App" ToRole="AppLocation" ed:Guid="256d98ce-e73e-49d3-b019-151062f6de66" />
+          <NavigationProperty Name="AppCategories" Relationship="AppSiteTestModel.App_AppCategory" FromRole="App" ToRole="AppCategories" ed:Guid="7d063444-8190-49ba-8d1f-c784f3e0f935" />
+        </EntityType>
+        <EntityType Name="AppIcon" ed:Guid="f7d20b02-57f7-4333-9e19-57025d7a3de8">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="4668e656-e795-4df9-b8fe-14f175d3aa10" />
+          <Property Name="IconName" Type="String" Nullable="false" ed:ValidateRequired="true" ed:Guid="bc2ba9e2-2166-43d7-aa05-6fea7bbed15a" />
+          <NavigationProperty Name="App" Relationship="AppSiteTestModel.FK_AppIcon_App" FromRole="AppIcon" ToRole="App" ed:Guid="f9360901-d6a2-4c37-8e6d-4aec5eb90e26" />
+        </EntityType>
+        <EntityType Name="AppLocation" ed:Guid="83afe48c-2ab6-40b0-af61-13a7e565ca12">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d2decb10-eb5c-4e63-9b64-cd8a62f2790d" />
+          <Property Name="FileName" Type="String" Nullable="false" ed:ValidateRequired="true" ed:Guid="97802a4d-ec16-4db6-94e7-218f00679737" />
+          <NavigationProperty Name="App" Relationship="AppSiteTestModel.FK_AppLocation_App" FromRole="AppLocation" ToRole="App" ed:Guid="68d17726-5962-4252-b504-0f3168a6a071" />
+        </EntityType>
+        <EntityType Name="CategoryMaster" ed:Guid="f2dfb693-ef48-4c6f-8dda-1588c66b164a">
+          <Key>
+            <PropertyRef Name="CategoryIndex" />
+          </Key>
+          <Property Name="CategoryIndex" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d4f64d69-2ca7-4a79-ab03-0918010347d7" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="e3014cc7-dd52-41fb-bf6d-38187525cb38" />
+          <NavigationProperty Name="AppCategories" Relationship="AppSiteTestModel.CategoryMaster_AppCategory" FromRole="CategoryMaster" ToRole="AppCategories" ed:Guid="4cf7f560-7125-486d-ba14-a3c05ee42c12" />
+        </EntityType>
+        <EntityType Name="AppCategory" ed:Guid="c896ea75-6f8b-487c-b639-3e98f1f70023">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CategoryIndex" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="06ec3095-b73d-44ed-b017-442fabe951b5" />
+          <Property Name="CategoryIndex" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="336dfcb6-dc16-42c9-8463-d6e13bc5ccdb" />
+          <NavigationProperty Name="App" Relationship="AppSiteTestModel.App_AppCategory" FromRole="AppCategories" ToRole="App" ed:Guid="76dc8076-eb64-4754-9ba6-73da4fc4d44a" />
+          <NavigationProperty Name="CategoryMaster" Relationship="AppSiteTestModel.CategoryMaster_AppCategory" FromRole="AppCategories" ToRole="CategoryMaster" ed:Guid="510484bf-11e6-4a02-a600-291084b2a5c4" />
+        </EntityType>
+        <Association Name="FK_AppIcon_App" ed:Guid="df3e0725-7072-4e79-8c7e-df0ac0d6b4ad">
+          <End Role="App" Type="AppSiteTestModel.App" Multiplicity="1" />
+          <End Role="AppIcon" Type="AppSiteTestModel.AppIcon" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppIcon">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppLocation_App" ed:Guid="ac717514-70d7-40b2-bd05-2f3f54a5e02d">
+          <End Role="App" Type="AppSiteTestModel.App" Multiplicity="1" />
+          <End Role="AppLocation" Type="AppSiteTestModel.AppLocation" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppLocation">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_AppCategory" ed:Guid="88c050f7-7a8c-40de-803c-06d8b29d84da">
+          <End Role="App" Type="AppSiteTestModel.App" Multiplicity="1" />
+          <End Role="AppCategories" Type="AppSiteTestModel.AppCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppCategories">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategoryMaster_AppCategory" ed:Guid="7deaae06-ceeb-4a19-8fb2-4d49c398ffcd">
+          <End Role="CategoryMaster" Type="AppSiteTestModel.CategoryMaster" Multiplicity="1" />
+          <End Role="AppCategories" Type="AppSiteTestModel.AppCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryMaster">
+              <PropertyRef Name="CategoryIndex" />
+            </Principal>
+            <Dependent Role="AppCategories">
+              <PropertyRef Name="CategoryIndex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- MSL content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AppSiteTestEntitiesStoreContainer" CdmEntityContainer="AppSiteTestEntities">
+          <EntitySetMapping Name="Apps">
+            <EntityTypeMapping TypeName="AppSiteTestModel.App">
+              <MappingFragment StoreEntitySet="Apps">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppIcons">
+            <EntityTypeMapping TypeName="AppSiteTestModel.AppIcon">
+              <MappingFragment StoreEntitySet="AppIcons">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IconName" ColumnName="IconName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppLocations">
+            <EntityTypeMapping TypeName="AppSiteTestModel.AppLocation">
+              <MappingFragment StoreEntitySet="AppLocations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryMasters">
+            <EntityTypeMapping TypeName="AppSiteTestModel.CategoryMaster">
+              <MappingFragment StoreEntitySet="CategoryMasters">
+                <ScalarProperty Name="CategoryIndex" ColumnName="CategoryIndex" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppCategories">
+            <EntityTypeMapping TypeName="AppSiteTestModel.AppCategory">
+              <MappingFragment StoreEntitySet="AppCategories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CategoryIndex" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="CopyToOutputDirectory" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:Diagrams>
+      <Diagram Name="Main" />
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
